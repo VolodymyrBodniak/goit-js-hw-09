@@ -1,4 +1,4 @@
-import { Notiflix } from 'notiflix';
+import Notiflix from 'notiflix';
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
@@ -36,14 +36,13 @@ form.addEventListener('submit', event => {
   const amount = parseInt(form.elements.amount.value, 10);
   const firstDelay = parseInt(form.elements.delay.value, 10);
   const step = parseInt(form.elements.step.value, 10);
+
+  if (firstDelay <= 0 || step <= 0) {
+    Notiflix.Notify.warning(
+      'Please enter values greater than 0 for First delay and Delay step'
+    );
+    return;
+  }
+
   createPromises(amount, firstDelay, step);
 });
-
-// function createPromise(position, delay) {
-//   const shouldResolve = Math.random() > 0.3;
-//   if (shouldResolve) {
-//     // Fulfill
-//   } else {
-//     // Reject
-//   }
-// }
